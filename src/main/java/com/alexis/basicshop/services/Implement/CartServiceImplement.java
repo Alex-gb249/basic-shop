@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service @RequiredArgsConstructor @Transactional @Slf4j
@@ -20,11 +19,13 @@ public class CartServiceImplement implements CartService {
 
     @Override
     public Cart saveCart(Cart cart) {
+        log.info("Saving new user {}.", cart.getId());
         return cartRepository.save(cart);
     }
 
     @Override
     public Item saveItem(Item item) {
+        log.info("Saving new item {}.", item.getId());
         return itemRepository.save(item);
     }
 
@@ -34,12 +35,15 @@ public class CartServiceImplement implements CartService {
         Optional<Item> item = itemRepository.findById(itemId);
         if(cart.isPresent() && item.isPresent()){
             Cart actuallCart = cart.get();
+            Item actuallItem = item.get();
+            log.info("Adding item {} to cart {}", actuallItem.getId(), actuallCart.getId());
             actuallCart.getItems().add(item.get());
         }
     }
 
     @Override
-    public List<Cart> getCart() {
-        return cartRepository.findAll();
+    public Optional<Cart> getCart(Long id) {
+        log.info("Searching cart by id: {}", id);
+        return cartRepository.findById(id);
     }
 }

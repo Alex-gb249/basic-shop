@@ -17,6 +17,7 @@ public class ProductServiceImplement implements ProductService {
 
     @Override
     public Product saveProduct(Product product) {
+        log.info("Saving new product {}.", product.getName());
         return productRepository.save(product);
     }
 
@@ -24,20 +25,23 @@ public class ProductServiceImplement implements ProductService {
     public Boolean deleteProduct(Long id) {
         try{
             productRepository.deleteById(id);
+            log.info("Deleted product {}.", id);
             return Boolean.TRUE;
         } catch (Exception e) {
-            log.error("Problem deleting Product: " + e);
+            log.error("Problem deleting Product {id}: {}", id, e);
             return Boolean.FALSE;
         }
     }
 
     @Override
     public Optional<Product> getProduct(Long id) {
+        log.info("Searching product by id: {}", id);
         return productRepository.findById(id);
     }
 
     @Override
     public List<Product> getProducts() {
+        log.info("Getting all products");
         return productRepository.findAll();
     }
 }
