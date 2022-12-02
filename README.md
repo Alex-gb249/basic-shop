@@ -26,4 +26,5 @@ Es **importante** destacar que en este proyecto se utiliza la librería **Spring
     3. Ejecución de logs.
 
 ## Notas importantes:
+- En la actualidad no conozco fuertemento como realizar la gestión de la base de datos, las tablas y los datos sin recurrir a JPA, es un fuerte que tengo que mejorar y eso haré.
 - El archivo **application.properties** en un proyecto real, no debería de estar en repositorio, puesto que contiene información sensible de acceso a base de datos, pero ya que este proyecto es una prueba, lo mantengo para efectos prácticos.
